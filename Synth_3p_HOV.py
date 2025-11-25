@@ -462,7 +462,7 @@ for cl in range (len(cases_list)):
     #########
 
     out_folder = 'Out_AUDIOS'
-    out_subfolder = Filename[19:28]+f'_{ope_synth}_AM'+f'_{AM_FACTOR}'+'_Q'+f'_{Q_m}'+'_be'+f'_{max_beta}'+'_'+time_var_m
+    out_subfolder = Filename[19:28]+f'_{ope_synth}_{velo_uas}_AM'+f'_{AM_FACTOR}'+'_Q'+f'_{Q_m}'+'_be'+f'_{max_beta}'+'_'+time_var_m
     ffolder = os.path.join(out_folder, out_subfolder)
     if not os.path.exists(ffolder):
         os.makedirs(ffolder)
