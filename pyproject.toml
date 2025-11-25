@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "DroneNoise recording-based synthesis"
+version = "0.2.0"
+description = "Synthesis of drone noise flyover at source and hovering at listener position"
+authors = [
+    { name = "Carlos Ramos-Romero", email = "c.a.ramosromero@salford.ac.uk" }
+]
+license = { file = "LICENSE" }
+readme = "README.md"
+keywords = ["Drone", "sUAS", "backpropagation", "synthesis"]
+
+dependencies = [
+    "numpy>=2.1",
+    "pandas>=1.3.0",
+    "matplotlib>=3.10",
+    "scipy>=1.16",
+    "cycler>=0.12.1",
+    "ipython>=6.9",
+    "plotly>=6.2",
+    "xlsxwriter >=3.0",
+    "jinja2" >= 3.0
+    
+]
+
+[tool.setuptools.packages.find]
+where = ["./Hemispheres", "./dntools"]
