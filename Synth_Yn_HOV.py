@@ -215,6 +215,19 @@ for cl in range (len(cases_list)):
     #----Bb_noise Midfiltering for Pwelch of notch filtering 
     psd_data_notched_midfiltered = ss.medfilt(psd_data_notched , kernel_size = 101)#81best
 
+    # If flyover operation sis simulated, BPFs will be different.
+    # ---- BPFs
+    # ---- CHange the BPFs when UAS moves forward.
+    ope_synth = "hover"
+    velo_uas = "00" # m/s
+    print(BPFs_to_add)
+    
+    synth_FO = True
+    if synth_FO == True:
+        ope_synth = "flyover"
+        velo_uas = "15" # m/s
+        Freqs_and_Amplitudes[1][0] = [151*1.1, 138*1.2, 167*1.2, 129*1.2, 157*1.1, 175*1.1] #[151, 138, 167, 129, 157, 175]"""hovering BPFs"""
+        Freqs_and_Amplitudes[0][0] = list(np.array(Freqs_and_Amplitudes[1][0])/n_blades)
 
     # %% --- ADITIVE Sinthesys
     # %%% ---- BB Noise method
@@ -310,17 +323,7 @@ for cl in range (len(cases_list)):
     plt.ylim(30,80)    
     # %%% --- TONAL components and FREQUENCY MODULATION
     # plt.close("all")
-    # ---- BPFs
-    # ---- CHange the BPFs when UAS moves forward.
-    ope_synth = "hover"
-    print(BPFs_to_add)
-    synth_FO = False
-    
-    if synth_FO == True:
-        ope_synth = "flyover"
-        Freqs_and_Amplitudes[1][0] = [151, 138, 167, 129, 157, 175]
-        Freqs_and_Amplitudes[0][0] = list(np.array(Freqs_and_Amplitudes[1][0])/n_blades)
-       
+
     # ---- No CHange the BPFs when UAS moves forward.
 
     BPFs_to_add =  Freqs_and_Amplitudes[1][0]

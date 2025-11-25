@@ -54,7 +54,7 @@ cases_list = [[0.3, 3.5, 5, 'aperiodic']] # Best case from previous analysis
 
 for cl in range (len(cases_list)):
     VS_Signal = cases_list[cl] # Variables for synthesis
-    # NOVERLAP = 2**8 #2**12
+ 
     #%% --- INPUT ACOUSTIC DATA from hovering
     # Filename = "Ed_M3_10_H00_N_C_nw_ev2_M5.wav"
     Drone_Recs = [#1500 ["wav file", [low_range,high_rnge], n_har, n_rotors, ee, number ob blades] 
@@ -169,8 +169,7 @@ for cl in range (len(cases_list)):
             
             amps_del = psd_data[freq_Amp_indx]/F_data[1]
             amps_delta.append(amps_del)
-
-            
+    
         # amps_delta = dspd.GaussianMixModel_peaks(All_Amp_BPFs_detected, n_components=n_rotors, \
         #                                           min_max=False, displot=False, magnitude ="Amplitude [dB]")
         

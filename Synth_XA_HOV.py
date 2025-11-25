@@ -38,9 +38,8 @@ preffsqr = (2e-5)**2
 Ndft    = 2**16#2**16
 df      = Fs/Ndft
 p_ref   = 20e-6
-#NOVERLAP = 2**8 #2**12
-WINDOW = 'hann'
 recordings_folder = 'base_recordings'
+WINDOW = 'hann'
 """ Choice of synthesis parameters
 # VS_Signal = [AM_FACTOR, Q_m, max_beta, Q_f, time_var_m] # Variables for synthesis
 # VS_Signal = [0.1, 4, 4, 4, 'aperiodic'] # Variables for synthesis symilar to the recording
@@ -170,8 +169,7 @@ for cl in range (len(cases_list)):
             
             amps_del = psd_data[freq_Amp_indx]/F_data[1]
             amps_delta.append(amps_del)
-
-            
+     
         # amps_delta = dspd.GaussianMixModel_peaks(All_Amp_BPFs_detected, n_components=n_rotors, \
         #                                           min_max=False, displot=False, magnitude ="Amplitude [dB]")
         
@@ -215,7 +213,20 @@ for cl in range (len(cases_list)):
 
     #----Bb_noise Midfiltering for Pwelch of notch filtering 
     psd_data_notched_midfiltered = ss.medfilt(psd_data_notched , kernel_size = 101)#81best
-
+    
+    # If flyover operation sis simulated, BPFs will be different.
+    # ---- BPFs
+    # ---- CHange the BPFs when UAS moves forward.
+    ope_synth = "hover"
+    velo_uas = "00" # m/s
+    print(BPFs_to_add)
+    
+    synth_FO = True
+    if synth_FO == True:
+        ope_synth = "flyover"
+        velo_uas = "03" # m/s
+        Freqs_and_Amplitudes[1][0] = [57, 61.7, 63.7, 68] #[58, 62, 64, 61]"""hovering BPFs"""
+        Freqs_and_Amplitudes[0][0] = list(np.array(Freqs_and_Amplitudes[1][0])/n_blades)
 
     # %% --- ADITIVE Sinthesys
     # %%% ---- BB Noise method
@@ -312,17 +323,7 @@ for cl in range (len(cases_list)):
     plt.ylim(30,80)    
     # %%% --- TONAL components and FREQUENCY MODULATION
     # plt.close("all")
-    # ---- BPFs
-    # ---- CHange the BPFs when UAS moves forward.
-    ope_synth = "hover"
-    print(BPFs_to_add)
-    synth_FO = False
     
-    if synth_FO == True:
-        ope_synth = "flyover"
-        Freqs_and_Amplitudes[1][0] = [58, 62, 64, 61]
-        Freqs_and_Amplitudes[0][0] = list(np.array(Freqs_and_Amplitudes[1][0])/n_blades)
-       
     # ---- No CHange the BPFs when UAS moves forward.
 
     BPFs_to_add =  Freqs_and_Amplitudes[1][0]
@@ -461,7 +462,7 @@ for cl in range (len(cases_list)):
     #########
 
     out_folder = 'Out_AUDIOS'
-    out_subfolder = Filename[19:28]+f'_{ope_synth}_AM'+f'_{AM_FACTOR}'+'_Q'+f'_{Q_m}'+'_be'+f'_{max_beta}'+'_'+time_var_m
+    out_subfolder = Filename[19:28]+f'_{ope_synth}_{velo_uas}_AM'+f'_{AM_FACTOR}'+'_Q'+f'_{Q_m}'+'_be'+f'_{max_beta}'+'_'+time_var_m
     ffolder = os.path.join(out_folder, out_subfolder)
     if not os.path.exists(ffolder):
         os.makedirs(ffolder)
