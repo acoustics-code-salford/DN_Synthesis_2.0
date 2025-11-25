@@ -27,6 +27,7 @@ share/python-wheels/
 MANIFEST
 # Local files
 Audios_Mike/
+Audios_Marc/
 Out_AUDIOS/
 SFR_Hov_TEST_3p_JASA_BP.py
 SFR_Hov_TEST_M3_JASA_BP.py
