@@ -50,7 +50,7 @@ bet_fac = [0.05, 1, 5]
 func_fact = ['periodic', 'aperiodic']
 cases_list = list(product(m_fac, Q_fac, bet_fac, func_fact))
 
-cases_list = [[0.3, 3.5, 1, 'aperiodic']] # Best case from previous analysis
+# cases_list = [[0.3, 3.5, 1, 'aperiodic']] # Best case from previous analysis
 
 for cl in range (len(cases_list)):
     VS_Signal = cases_list[cl] # Variables for synthesis
